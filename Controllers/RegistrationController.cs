@@ -1,10 +1,11 @@
 ﻿using E_CommerceNet.AdventureContext;
+using E_CommerceNet.Model.Request;
 using E_CommerceNet.Model.Response;
 using E_CommerceNet.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
-using static E_CommerceNet.Model.Request.Request;
+
 
 namespace E_CommerceNet.Controllers
 {
@@ -35,16 +36,6 @@ namespace E_CommerceNet.Controllers
             string remoteIpAddress = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "Unknown";
             string ipAddress = !string.IsNullOrEmpty(ip) ? $"{remoteIpAddress} / {ip}" : remoteIpAddress;
             _logger.LogInformation($"[{currentRequest.Path}] => API Access From IP: [{ipAddress}]");
-
-            #endregion
-
-
-            #region IP Address
-
-            //var ip = currentRequest.Headers["X-Forwarded-For"].FirstOrDefault();
-            //string? ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
-            //ipAddress = ipAddress + " / " + ip;
-            //_logger.LogInformation($"[{currentRequest.Path}] => API Access From IP: [{ipAddress}]");
 
             #endregion
 

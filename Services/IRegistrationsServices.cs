@@ -1,8 +1,9 @@
 ﻿using E_CommerceNet.AdventureContext;
 using E_CommerceNet.Controllers;
 using E_CommerceNet.DataEntity;
+using E_CommerceNet.Model.Request;
 using E_CommerceNet.Model.Response;
-using static E_CommerceNet.Model.Request.Request;
+
 
 namespace E_CommerceNet.Services
 {
