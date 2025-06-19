@@ -3,6 +3,7 @@ using E_CommerceNet.Controllers;
 using E_CommerceNet.DataEntity;
 using E_CommerceNet.Model.Request;
 using E_CommerceNet.Model.Response;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace E_CommerceNet.Services
@@ -27,6 +28,19 @@ namespace E_CommerceNet.Services
         {
             try
             {
+                var Namedata = await _Dbcontext.RegistrationDetails
+                               .Where(u => u.Email!.ToLower().Contains(request.Email!.ToLower())).FirstOrDefaultAsync();
+                var Passdata = await _Dbcontext.RegistrationDetails
+                                    .Where(u => u.Email!.ToLower().Contains(u.Password!.ToLower())).FirstOrDefaultAsync();
+                if (Namedata != null)
+                {
+                    return new CommonResponse() { resCode = 403, resData = null, resMessage = "This user already exist" };
+                }
+                if (Passdata != null)
+                {
+                    return new CommonResponse() { resCode = 403, resData = null, resMessage = "This Password already exist" };
+                }
+
                 var data = new RegistrationDetails
                 {
                     Name = request.Name,

@@ -14,7 +14,7 @@ namespace E_CommerceNet.Helpers
         private AdventureDbContext _dbContext; 
         private readonly RequestDelegate _next;
         private readonly Appsettings _appsettings;
-
+        
         public JwtMiddleware(IOptions<Appsettings> appsetting, RequestDelegate next)
         {
             _next = next;

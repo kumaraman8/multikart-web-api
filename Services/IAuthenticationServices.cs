@@ -41,7 +41,8 @@ namespace E_CommerceNet.Services
         #region LoginAuth
         public async Task<CommonResponse> LoginAuth(LoginRequest request)
         {
-            var userData = await _dbContext.RegistrationDetails.Where(u=>u.Email == request.Email && u.Password == request.Password).FirstOrDefaultAsync();
+            var userData = await _dbContext.RegistrationDetails.Where(u=>u.Email == request.Email && u.Password == request.Password).FirstOrDefaultAsync();    
+
             if (userData == null)
             {
                 return new CommonResponse() { resCode = 403, resData = null, resMessage = "Data Not Found" };

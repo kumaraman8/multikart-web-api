@@ -15,7 +15,7 @@ using System.Text;
 namespace E_CommerceNet.Controllers
 {
     [ApiController]
-    [Route("[controller]")]    
+    [Route("[controller]")]
     public class AuthenticationController : ControllerBase
     {
         private AdventureDbContext _dbcontext;
@@ -69,6 +69,7 @@ namespace E_CommerceNet.Controllers
         }
         #endregion
 
+        #region ExtendToken
         [Authorize] // ensures token is valid
         [HttpPost("extendToken")]
         public IActionResult ExtendToken()
@@ -126,4 +127,5 @@ namespace E_CommerceNet.Controllers
         }
 
     }
+    #endregion
 }
