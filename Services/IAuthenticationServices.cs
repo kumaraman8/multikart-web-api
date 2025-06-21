@@ -4,6 +4,7 @@ using E_CommerceNet.DataEntity;
 using E_CommerceNet.Helpers;
 using E_CommerceNet.Model.Request;
 using E_CommerceNet.Model.Response;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -41,7 +42,21 @@ namespace E_CommerceNet.Services
         #region LoginAuth
         public async Task<CommonResponse> LoginAuth(LoginRequest request)
         {
-            var userData = await _dbContext.RegistrationDetails.Where(u=>u.Email == request.Email && u.Password == request.Password).FirstOrDefaultAsync();    
+            var userData = await _dbContext.RegistrationDetails.Where(u=>u.Email == request.Email).FirstOrDefaultAsync();
+
+            // Verify the hashed password
+            var passwordHasher = new PasswordHasher<string>();
+            var result = passwordHasher.VerifyHashedPassword(null!, userData.Password!, request.Password!);
+
+            if (result != PasswordVerificationResult.Success)
+            {
+                return new CommonResponse()
+                {
+                    resCode = 403,
+                    resData = null,
+                    resMessage = "Invalid email or password"
+                };
+            }
 
             if (userData == null)
             {

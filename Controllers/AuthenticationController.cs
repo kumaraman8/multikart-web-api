@@ -56,7 +56,6 @@ namespace E_CommerceNet.Controllers
                 else
                 {
                     return StatusCode(response.resCode, response);
-                    //return Ok(new CommonResponse { resCode = 200, resData = response, resMessage = "Success!!" });
                 }
             }
             catch (Exception ex)
